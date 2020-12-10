@@ -16,8 +16,15 @@ public class Controller {
 
     private final ActorRef<SpideSystem.Message> spideSystem;
 
+    @RequestMapping("/init")
+    public void init() {
+        for (int i=0; i<100; i++){
+            spideSystem.tell(new SpideSystem.SpideMsg("actor_url_" + i));
+        }
+    }
+
     @RequestMapping("/start")
-    public void test() {
-        spideSystem.tell(new SpideSystem.SpideMsg());
+    public void start() {
+
     }
 }

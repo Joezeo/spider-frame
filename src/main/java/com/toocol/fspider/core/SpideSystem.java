@@ -5,7 +5,8 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.toocol.fspider.resolver.AbstractPageResolver;
+import com.toocol.fspider.core.actor.SpideActor;
+import com.toocol.fspider.utils.CastUtil;
 import lombok.AllArgsConstructor;
 
 /**
@@ -25,7 +26,9 @@ public class SpideSystem extends AbstractBehavior<SpideSystem.Message> {
     /**
      * when spide system recive this msg, make sub actor to spide url
      */
+    @AllArgsConstructor
     public static final class SpideMsg implements Message {
+        private final String url;
     }
 
     /**
@@ -60,6 +63,8 @@ public class SpideSystem extends AbstractBehavior<SpideSystem.Message> {
     }
 
     private Behavior<Message> onSpide(Message message) {
+        SpideMsg msg = CastUtil.cast(message);
+        getContext().spawn(SpideActor.create(msg.url), "spide-actor-" + msg.url);
         return this;
     }
 
