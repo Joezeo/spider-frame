@@ -10,12 +10,14 @@ import com.toocol.fspider.utils.CastUtil;
 import lombok.AllArgsConstructor;
 
 /**
- * spide management system core
+ * Crawler-management-system's core supervisor actor
  *
  * @author Joezeo
  * @date 2020/12/10 21:10
  */
-public class SpideSystem extends AbstractBehavior<SpideSystem.Message> {
+public class CmsSupervisor extends AbstractBehavior<CmsSupervisor.Message> {
+    //TODO: no need for protocol define in the supervisor actor
+
     /* ---protocol start--- */
     /**
      * define message protocol interface
@@ -45,10 +47,10 @@ public class SpideSystem extends AbstractBehavior<SpideSystem.Message> {
     /* ---protocol end--- */
 
     public static Behavior<Message> create() {
-        return Behaviors.setup(SpideSystem::new);
+        return Behaviors.setup(CmsSupervisor::new);
     }
 
-    public SpideSystem(ActorContext<Message> context) {
+    public CmsSupervisor(ActorContext<Message> context) {
         super(context);
         getContext().getLog().info("start the akka spide system ~");
     }

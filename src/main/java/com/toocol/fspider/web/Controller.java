@@ -1,7 +1,7 @@
 package com.toocol.fspider.web;
 
 import akka.actor.typed.ActorRef;
-import com.toocol.fspider.core.SpideSystem;
+import com.toocol.fspider.core.CmsSupervisor;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class Controller {
 
-    private final ActorRef<SpideSystem.Message> spideSystem;
+    private final ActorRef<CmsSupervisor.Message> spideSystem;
 
     @RequestMapping("/init")
     public void init() {
         for (int i=0; i<100; i++){
-            spideSystem.tell(new SpideSystem.SpideMsg("actor_url_" + i));
+            spideSystem.tell(new CmsSupervisor.SpideMsg("actor_url_" + i));
         }
     }
 
