@@ -18,9 +18,7 @@ public class Controller {
 
     @RequestMapping("/init")
     public void init() {
-        for (int i=0; i<100; i++){
-            spideSystem.tell(new CmsSupervisor.SpideMsg("actor_url_" + i));
-        }
+
     }
 
     @RequestMapping("/start")
